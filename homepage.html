@@ -1,1 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kebab Zone, Underwood</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Figtree:wght@400;600&display=swap">
+<style>
+:root{--bg:#fff8e6;--ink:#2b1a12;--sun:#ffb81c;--chili:#c8321e;--card:#ffffff;--muted:#6b5546;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#22140e;--ink:#fff1d6;--card:#33201a;--muted:#d1b9a3;--chili:#ff7a5c}}
+:root[data-theme="dark"]{--bg:#22140e;--ink:#fff1d6;--card:#33201a;--muted:#d1b9a3;--chili:#ff7a5c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.6 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;line-height:1.05;margin:0}
+a{color:inherit}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.25rem}
+.hero{background:var(--sun);color:#2b1a12;padding:3.5rem 0 4rem;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-6rem;top:-6rem;width:20rem;height:20rem;border-radius:50%;background:#ffd36b;opacity:.7}
+.hero .wrap{position:relative;z-index:1}
+.hero h1{font-size:clamp(2.8rem,10vw,6rem);font-weight:800;max-width:12ch}
+.hero p{font-size:1.25rem;max-width:34rem;margin:1rem 0 1.75rem}
+.btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.85rem 1.4rem;border-radius:999px;font-weight:600;text-decoration:none;background:#2b1a12;color:#fff8e6}
+.btn.alt{background:transparent;border:2px solid #2b1a12;color:#2b1a12}
+.btn:focus-visible,a:focus-visible{outline:3px solid var(--chili);outline-offset:3px}
+section{padding:3.5rem 0}
+h2{font-size:clamp(1.9rem,5vw,2.8rem);font-weight:800;margin-bottom:1rem}
+.two{display:grid;gap:2rem;grid-template-columns:1fr}
+@media(min-width:760px){.two{grid-template-columns:1fr 1fr}}
+.facts{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));margin-top:1.5rem}
+.fact{background:var(--card);border-radius:1.25rem;padding:1.25rem;border-left:6px solid var(--sun)}
+.fact b{font:800 2rem "Bricolage Grotesque",sans-serif;display:block}
+.fact span{color:var(--muted)}
+.menu{list-style:none;padding:0;margin:0;background:var(--card);border-radius:1.25rem;padding:.5rem 1.25rem}
+.menu li{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;border-bottom:1px dashed var(--muted)}
+.menu li:last-child{border:0}
+.menu small{display:block;color:var(--muted)}
+.price{font-weight:600;color:var(--chili);white-space:nowrap}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.mcat{background:var(--card);border-radius:1.25rem;padding:1.25rem;border-top:6px solid var(--chili)}
+.mcat h3{font-size:1.5rem;margin-bottom:.35rem}
+.mcat .d{color:var(--muted);font-size:.95rem;margin:0 0 .75rem}
+.mcat ul{list-style:none;margin:0;padding:0}
+.mcat li{padding:.5rem 0;border-top:1px dashed var(--muted);font-weight:600}
+.mcat small{display:block;font-weight:400;color:var(--muted)}
+.note{color:var(--muted);font-size:.95rem;margin-top:.75rem}
+.band{background:var(--chili);color:#fff8e6;text-align:center;padding:2.5rem 1.25rem}
+.band p{font:800 clamp(1.6rem,5vw,2.6rem) "Bricolage Grotesque",sans-serif;margin:0}
+footer{padding:2.5rem 0;color:var(--muted);font-size:.95rem}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <h1>Fresh kebabs, made fast.</h1>
+    <p>Fresh, authentic Mediterranean kebabs at Underwood. Turkish and Middle Eastern, made fast and made fresh.</p>
+    <div class="btns">
+      <a class="btn" href="#find">Find us</a>
+      <a class="btn alt" href="#about">Our story</a>
+    </div>
+  </div>
+</header>
 
+<main>
+<section id="about">
+  <div class="wrap two">
+    <div>
+      <h2>Welcome to Kebab Zone</h2>
+      <p>Turkish and Middle Eastern kebabs, gyros, platters, burgers and more, served at Underwood. Pick up your order and enjoy it fresh.</p>
+    </div>
+    <div>
+      <h2>Something for everyone</h2>
+      <p>From chicken and doner kebabs to falafel and vegetarian options, snack packs, chargrills, desserts and wood-fired pizza, there is plenty to choose from.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="facts">
+      <div class="fact"><b>71</b><span>Items on the menu</span></div>
+      <div class="fact"><b>13</b><span>Menu categories</span></div>
+      <div class="fact"><b>Pick-up</b><span>Order and collect</span></div>
+      <div class="fact"><b>Turkish</b><span>and Middle Eastern</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="band"><p>Fresh, fast and fabulous</p></div>
+
+
+<section id="find">
+  <div class="wrap two">
+    <div>
+      <h2>Find us</h2>
+      <p><strong>Kebab Zone, Underwood</strong><br>3231 Logan Road<br>Underwood QLD 4119</p>
+      <div class="btns" style="margin-top:1rem">
+        <a class="btn" style="background:var(--chili)" href="https://www.google.com/maps/search/?api=1&amp;query=Kebab+Zone+3231+Logan+Road+Underwood+QLD+4119">Get directions</a>
+      </div>
+    </div>
+    <div>
+      <h2>Order your way</h2>
+      <p>Come in and order at the counter, or get it delivered. Ask in store for today's opening hours.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Kebab Zone, Underwood. Turkish and Middle Eastern.</div>
+</footer>
+</body>
+</html>
