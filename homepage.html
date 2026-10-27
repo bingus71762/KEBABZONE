@@ -1,578 +1,112 @@
-
 <!DOCTYPE html>
-<html lang="en-AU" data-theme="light">
+<html lang="en-AU">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#fff8e6">
-<meta name="description" content="Visit Centro Gympie. Find the location, explore the area and get directions.">
-<title>Centro Gympie | Find Us</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600;700&display=swap">
-
-<!-- Interactive map -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-
+<title>Kebab Zone, Underwood</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Figtree:wght@400;600&display=swap">
 <style>
-:root {
-  --bg: #fff8e6;
-  --ink: #2b1a12;
-  --sun: #ffb81c;
-  --chili: #c8321e;
-  --card: #ffffff;
-  --muted: #6b5546;
-  --border: #eadfca;
-  --shadow: 0 12px 35px rgba(43,26,18,.08);
-  --radius: 24px;
-}
-
-:root[data-theme="dark"] {
-  --bg: #22140e;
-  --ink: #fff1d6;
-  --card: #33201a;
-  --muted: #d1b9a3;
-  --chili: #ff7a5c;
-  --border: #584034;
-  --shadow: 0 12px 35px rgba(0,0,0,.18);
-}
-
-* { box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font: 400 1rem/1.65 Figtree, system-ui, sans-serif;
-}
-
-a { color: inherit; }
-
-button, a { -webkit-tap-highlight-color: transparent; }
-
-a:focus-visible, button:focus-visible {
-  outline: 3px solid var(--chili);
-  outline-offset: 4px;
-}
-
-.wrap {
-  width: min(1120px, calc(100% - 40px));
-  margin-inline: auto;
-}
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav {
-  min-height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.brand {
-  font: 800 1.4rem "Bricolage Grotesque", sans-serif;
-  text-decoration: none;
-}
-
-.brand span { color: var(--chili); }
-
-.navlinks {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.navlinks a {
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.navlinks a:hover { color: var(--chili); }
-
-.theme-toggle {
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--ink);
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  padding: 88px 0 82px;
-  background: var(--sun);
-  color: #2b1a12;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  width: 350px;
-  height: 350px;
-  right: -100px;
-  top: -120px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.23);
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  right: 17%;
-  bottom: -120px;
-  border-radius: 50%;
-  background: rgba(200,50,30,.1);
-}
-
-.hero .wrap { position: relative; z-index: 1; }
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,.65);
-  border-radius: 999px;
-  padding: 7px 13px;
-  font-size: .86rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-h1, h2, h3 {
-  font-family: "Bricolage Grotesque", sans-serif;
-  line-height: 1.12;
-  margin-top: 0;
-}
-
-h1 {
-  font-size: clamp(3rem, 8vw, 6rem);
-  max-width: 850px;
-  margin-bottom: 20px;
-  letter-spacing: -.045em;
-}
-
-.hero p {
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
-  max-width: 590px;
-  margin: 0 0 28px;
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 50px;
-  padding: 12px 22px;
-  border: 2px solid transparent;
-  border-radius: 999px;
-  background: #2b1a12;
-  color: #fff8e6;
-  font: 700 .98rem Figtree, sans-serif;
-  text-decoration: none;
-  transition: transform .2s, opacity .2s;
-}
-
-.btn:hover { transform: translateY(-2px); }
-
-.btn-outline {
-  border-color: #2b1a12;
-  background: transparent;
-  color: #2b1a12;
-}
-
-.btn-red {
-  background: var(--chili);
-  color: white;
-}
-
-section { padding: 76px 0; }
-
-.section-heading {
-  max-width: 680px;
-  margin-bottom: 30px;
-}
-
-h2 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  letter-spacing: -.025em;
-  margin-bottom: 12px;
-}
-
-.section-heading p, .muted { color: var(--muted); }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 25px;
-  box-shadow: var(--shadow);
-}
-
-.card-icon {
-  display: grid;
-  place-items: center;
-  width: 52px;
-  height: 52px;
-  margin-bottom: 18px;
-  border-radius: 16px;
-  background: #fff0c4;
-  font-size: 1.5rem;
-}
-
-.card h3 {
-  font-size: 1.35rem;
-  margin-bottom: 8px;
-}
-
-.card p {
-  color: var(--muted);
-  margin: 0;
-}
-
-.location-section { padding-top: 45px; }
-
-.location-layout {
-  display: grid;
-  grid-template-columns: .85fr 1.4fr;
-  gap: 26px;
-  align-items: stretch;
-}
-
-.location-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.location-info .address {
-  font-size: 1.08rem;
-  margin-bottom: 20px;
-}
-
-.info-line {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin: 12px 0;
-}
-
-.info-line .emoji {
-  font-size: 1.25rem;
-  flex-shrink: 0;
-}
-
-.map-card {
-  min-width: 0;
-  overflow: hidden;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-.map-heading {
-  padding: 20px 22px;
-}
-
-.map-heading h3 { margin-bottom: 5px; }
-
-.map-heading p {
-  margin: 0;
-  color: var(--muted);
-  font-size: .93rem;
-}
-
-#map {
-  width: 100%;
-  height: 390px;
-  background: #eee5d6;
-}
-
-.map-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding: 18px;
-}
-
-.map-actions .btn { flex: 1; }
-
-.banner {
-  padding: 45px 20px;
-  background: var(--chili);
-  color: white;
-  text-align: center;
-}
-
-.banner h2 { margin-bottom: 10px; }
-
-.banner p {
-  max-width: 600px;
-  margin: auto;
-  opacity: .95;
-}
-
-footer {
-  padding: 30px 0;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-}
-
-.footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
-footer p { margin: 0; }
-
-.back-top {
-  text-decoration: none;
-  font-weight: 700;
-}
-
-@media (max-width: 760px) {
-  .wrap { width: min(100% - 30px, 600px); }
-
-  .nav { min-height: 66px; }
-
-  .navlinks { gap: 12px; }
-
-  .navlinks a { font-size: .9rem; }
-
-  .hero { padding: 66px 0 60px; }
-
-  section { padding: 55px 0; }
-
-  .grid { grid-template-columns: 1fr; }
-
-  .location-layout { grid-template-columns: 1fr; }
-
-  #map { height: 330px; }
-
-  .card { padding: 22px; }
-}
-
-@media (max-width: 420px) {
-  .brand { font-size: 1.15rem; }
-  .navlinks { gap: 9px; }
-  .navlinks a { font-size: .82rem; }
-  .theme-toggle { width: 38px; height: 38px; }
-  .hero .btn { width: 100%; }
-}
+:root{--bg:#fff8e6;--ink:#2b1a12;--sun:#ffb81c;--chili:#c8321e;--card:#ffffff;--muted:#6b5546;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#22140e;--ink:#fff1d6;--card:#33201a;--muted:#d1b9a3;--chili:#ff7a5c}}
+:root[data-theme="dark"]{--bg:#22140e;--ink:#fff1d6;--card:#33201a;--muted:#d1b9a3;--chili:#ff7a5c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.6 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;line-height:1.05;margin:0}
+a{color:inherit}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.25rem}
+.hero{background:var(--sun);color:#2b1a12;padding:3.5rem 0 4rem;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-6rem;top:-6rem;width:20rem;height:20rem;border-radius:50%;background:#ffd36b;opacity:.7}
+.hero .wrap{position:relative;z-index:1}
+.hero h1{font-size:clamp(2.8rem,10vw,6rem);font-weight:800;max-width:12ch}
+.hero p{font-size:1.25rem;max-width:34rem;margin:1rem 0 1.75rem}
+.btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.85rem 1.4rem;border-radius:999px;font-weight:600;text-decoration:none;background:#2b1a12;color:#fff8e6}
+.btn.alt{background:transparent;border:2px solid #2b1a12;color:#2b1a12}
+.btn:focus-visible,a:focus-visible{outline:3px solid var(--chili);outline-offset:3px}
+section{padding:3.5rem 0}
+h2{font-size:clamp(1.9rem,5vw,2.8rem);font-weight:800;margin-bottom:1rem}
+.two{display:grid;gap:2rem;grid-template-columns:1fr}
+@media(min-width:760px){.two{grid-template-columns:1fr 1fr}}
+.facts{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));margin-top:1.5rem}
+.fact{background:var(--card);border-radius:1.25rem;padding:1.25rem;border-left:6px solid var(--sun)}
+.fact b{font:800 2rem "Bricolage Grotesque",sans-serif;display:block}
+.fact span{color:var(--muted)}
+.menu{list-style:none;padding:0;margin:0;background:var(--card);border-radius:1.25rem;padding:.5rem 1.25rem}
+.menu li{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;border-bottom:1px dashed var(--muted)}
+.menu li:last-child{border:0}
+.menu small{display:block;color:var(--muted)}
+.price{font-weight:600;color:var(--chili);white-space:nowrap}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.mcat{background:var(--card);border-radius:1.25rem;padding:1.25rem;border-top:6px solid var(--chili)}
+.mcat h3{font-size:1.5rem;margin-bottom:.35rem}
+.mcat .d{color:var(--muted);font-size:.95rem;margin:0 0 .75rem}
+.mcat ul{list-style:none;margin:0;padding:0}
+.mcat li{padding:.5rem 0;border-top:1px dashed var(--muted);font-weight:600}
+.mcat small{display:block;font-weight:400;color:var(--muted)}
+.note{color:var(--muted);font-size:.95rem;margin-top:.75rem}
+.band{background:var(--chili);color:#fff8e6;text-align:center;padding:2.5rem 1.25rem}
+.band p{font:800 clamp(1.6rem,5vw,2.6rem) "Bricolage Grotesque",sans-serif;margin:0}
+footer{padding:2.5rem 0;color:var(--muted);font-size:.95rem}
 </style>
 </head>
-
 <body>
-<header>
-  <nav class="wrap nav" aria-label="Main navigation">
-    <a class="brand" href="#home">Centro <span>Gympie</span></a>
-
-    <div class="navlinks">
-      <a href="#about">About</a>
-      <a href="#find">Location</a>
-      <button class="theme-toggle" id="themeToggle"
-        type="button" aria-label="Switch colour theme" title="Switch colour theme">🌙</button>
+<header class="hero">
+  <div class="wrap">
+    <h1>Fresh kebabs, made fast.</h1>
+    <p>Fresh, authentic Mediterranean kebabs at Underwood. Turkish and Middle Eastern, made fast and made fresh.</p>
+    <div class="btns">
+      <a class="btn" href="#find">Find us</a>
+      <a class="btn alt" href="menu.html">View menu</a>
     </div>
-  </nav>
+  </div>
 </header>
 
 <main>
-  <section class="hero" id="home">
-    <div class="wrap">
-      <div class="eyebrow">📍 Gympie, Queensland</div>
-      <h1>Find your way to Centro Gympie.</h1>
-      <p>
-        Get location details, explore the map and plan your visit with
-        easy access to directions.
-      </p>
-      <div class="actions">
-        <a class="btn" href="#find">📍 Find the location</a>
-        <a class="btn btn-outline"
-           href="https://www.google.com/maps/search/?api=1&query=Centro+Gympie+Queensland"
-           target="_blank" rel="noopener noreferrer">Open Google Maps ↗</a>
+<section id="about">
+  <div class="wrap two">
+    <div>
+      <h2>Welcome to Kebab Zone</h2>
+      <p>Turkish and Middle Eastern kebabs, gyros, platters, burgers and more, served at Underwood. Pick up your order and enjoy it fresh.</p>
+    </div>
+    <div>
+      <h2>Something for everyone</h2>
+      <p>From chicken and doner kebabs to falafel and vegetarian options, snack packs, chargrills, desserts and wood-fired pizza, there is plenty to choose from.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="facts">
+      <div class="fact"><b>71</b><span>Items on the menu</span></div>
+      <div class="fact"><b>13</b><span>Menu categories</span></div>
+      <div class="fact"><b>Pick-up</b><span>Order and collect</span></div>
+      <div class="fact"><b>Turkish</b><span>and Middle Eastern</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="band"><p>Fresh, fast and fabulous</p></div>
+
+
+<section id="find">
+  <div class="wrap two">
+    <div>
+      <h2>Find us</h2>
+      <p><strong>Kebab Zone, Underwood</strong><br>3231 Logan Road<br>Underwood QLD 4119</p>
+      <div class="btns" style="margin-top:1rem">
+        <a class="btn" style="background:var(--chili)" href="https://www.google.com/maps/search/?api=1&amp;query=Kebab+Zone+3231+Logan+Road+Underwood+QLD+4119">Get directions</a>
       </div>
     </div>
-  </section>
-
-  <section id="about">
-    <div class="wrap">
-      <div class="section-heading">
-        <h2>Everything you need to get there</h2>
-        <p>A simple, mobile-friendly guide to finding Centro Gympie and planning your trip.</p>
-      </div>
-
-      <div class="grid">
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">🗺️</div>
-          <h3>Explore the map</h3>
-          <p>View the area on an interactive map and zoom in or out to explore nearby streets.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">🚗</div>
-          <h3>Easy directions</h3>
-          <p>Open Google Maps to plan your route and get navigation from your current location.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">📱</div>
-          <h3>Works on mobile</h3>
-          <p>Use the site on your phone, tablet or computer with a layout designed for easy navigation.</p>
-        </article>
-      </div>
+    <div>
+      <h2>Order your way</h2>
+      <p>Come in and order at the counter, or get it delivered. Ask in store for today's opening hours.</p>
     </div>
-  </section>
-
-  <section class="location-section" id="find">
-    <div class="wrap">
-      <div class="section-heading">
-        <h2>Find Centro Gympie</h2>
-        <p>Use the map below to explore the location or open a navigation app for directions.</p>
-      </div>
-
-      <div class="location-layout">
-        <div class="card location-info">
-          <div class="card-icon" aria-hidden="true">📍</div>
-          <h3>Centro Gympie</h3>
-          <p class="muted">Gympie, Queensland, Australia</p>
-
-          <div class="info-line">
-            <span class="emoji" aria-hidden="true">🧭</span>
-            <div>
-              <strong>Location</strong><br>
-              <span class="muted">Gympie, QLD</span>
-            </div>
-          </div>
-
-          <div class="info-line">
-            <span class="emoji" aria-hidden="true">🚘</span>
-            <div>
-              <strong>Plan your trip</strong><br>
-              <span class="muted">Get a route using Google Maps.</span>
-            </div>
-          </div>
-
-          <div class="actions" style="margin-top:22px">
-            <a class="btn btn-red"
-               href="https://www.google.com/maps/dir/?api=1&destination=Centro+Gympie+Queensland"
-               target="_blank" rel="noopener noreferrer">
-              Get directions ↗
-            </a>
-          </div>
-
-          <p class="muted" style="font-size:.85rem;margin-top:18px">
-            Please confirm the exact destination before travelling.
-          </p>
-        </div>
-
-        <div class="map-card">
-          <div class="map-heading">
-            <h3>Explore the map</h3>
-            <p>Move the map, zoom in, or open it in a navigation app.</p>
-          </div>
-
-          <div id="map" role="application" aria-label="Interactive map showing the Gympie area"></div>
-
-          <div class="map-actions">
-            <a class="btn btn-red"
-               href="https://www.google.com/maps/search/?api=1&query=Centro+Gympie+Queensland"
-               target="_blank" rel="noopener noreferrer">View on Google Maps ↗</a>
-            <a class="btn"
-               style="background:var(--ink);color:var(--bg)"
-               href="https://www.openstreetmap.org/search?query=Centro%20Gympie%20Queensland"
-               target="_blank" rel="noopener noreferrer">OpenStreetMap ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="banner">
-    <div class="wrap">
-      <h2>Your journey starts here.</h2>
-      <p>Use the map and directions links to help plan your visit to Gympie.</p>
-    </div>
-  </section>
+  </div>
+</section>
 </main>
 
 <footer>
-  <div class="wrap footer-inner">
-    <p>Centro Gympie · Gympie, Queensland</p>
-    <a class="back-top" href="#home">Back to top ↑</a>
-  </div>
+  <div class="wrap">Kebab Zone, Underwood. Turkish and Middle Eastern.</div>
 </footer>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-  // Centre the map on the general Gympie area.
-  // This is not a verified pin for a specific Centro Gympie address.
-  const gympie = [-26.1898, 152.6650];
-
-  const map = L.map('map', {
-    scrollWheelZoom: false
-  }).setView(gympie, 13);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-
-  L.marker(gympie)
-    .addTo(map)
-    .bindPopup(
-      '<strong>Gympie, Queensland</strong><br>' +
-      'General area only. Confirm the exact Centro Gympie location.'
-    )
-    .openPopup();
-
-  // Light/dark theme toggle.
-  const themeToggle = document.getElementById('themeToggle');
-  const root = document.documentElement;
-
-  themeToggle.addEventListener('click', () => {
-    const isDark = root.dataset.theme !== 'dark';
-    root.dataset.theme = isDark ? 'dark' : 'light';
-    themeToggle.textContent = isDark ? '☀️' : '🌙';
-    themeToggle.setAttribute(
-      'aria-label',
-      isDark ? 'Switch to light theme' : 'Switch to dark theme'
-    );
-  });
-</script>
 </body>
 </html>
