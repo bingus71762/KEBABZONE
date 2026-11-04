@@ -4,162 +4,190 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
+<meta name="description" content="Kebab Zone: fresh Turkish and Middle Eastern kebabs, gyros, platters and more. Pick-up at Gympie Central.">
 <title>Kebab Zone, Underwood</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Figtree:wght@400;600&display=swap">
+<script>try{var t=localStorage.getItem("kz-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,800&family=DM+Sans:wght@400;500;700&display=swap">
 <style>
 :root{
-  --bg:#ffffff;--ink:#0a0a0a;--muted:#5c5c5c;--line:#e4e4e4;--soft:#f5f5f5;
-  --btn-bg:#0a0a0a;--btn-ink:#ffffff;--map-filter:grayscale(1) contrast(1.05);
-  --radius:1rem;
+  --paper:#f4eee1;--card:#fbf8f1;--ink:#1a1714;--muted:#6a6155;--line:#d8ccb7;
+  --accent:#c4381a;--accent-ink:#ffffff;--panel:#1a1714;--panel-ink:#f4eee1;
+  --map-filter:sepia(.25) saturate(.8) contrast(1.02);
+  --serif:Fraunces,Georgia,"Times New Roman",serif;
+  --sans:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#0a0a0a;--ink:#f5f5f5;--muted:#a3a3a3;--line:#262626;--soft:#141414;
-    --btn-bg:#f5f5f5;--btn-ink:#0a0a0a;--map-filter:grayscale(1) invert(1) contrast(.9);
+    --paper:#15110e;--card:#1d1814;--ink:#f3ece0;--muted:#a69b8c;--line:#312a24;
+    --accent:#ff6b45;--accent-ink:#1a0d08;--panel:#241d18;--panel-ink:#f3ece0;
+    --map-filter:invert(.92) hue-rotate(180deg) saturate(.7) contrast(.95);
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0a0a0a;--ink:#f5f5f5;--muted:#a3a3a3;--line:#262626;--soft:#141414;
-  --btn-bg:#f5f5f5;--btn-ink:#0a0a0a;--map-filter:grayscale(1) invert(1) contrast(.9);
+  --paper:#15110e;--card:#1d1814;--ink:#f3ece0;--muted:#a69b8c;--line:#312a24;
+  --accent:#ff6b45;--accent-ink:#1a0d08;--panel:#241d18;--panel-ink:#f3ece0;
+  --map-filter:invert(.92) hue-rotate(180deg) saturate(.7) contrast(.95);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:5rem}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 Figtree,system-ui,sans-serif;
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.05rem/1.6 var(--sans);
   padding-bottom:env(safe-area-inset-bottom,0px);-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;line-height:1.05;margin:0;letter-spacing:-.02em}
+h1,h2,h3{font-family:var(--serif);margin:0;letter-spacing:-.02em}
+p{margin:0 0 1rem}
 a{color:inherit}
-.wrap{max-width:62rem;margin:0 auto;padding:0 1.25rem}
-
-/* accessibility */
-.skip{position:absolute;left:1rem;top:-4rem;background:var(--btn-bg);color:var(--btn-ink);padding:.6rem 1rem;border-radius:.5rem;z-index:20;text-decoration:none}
+.wrap{max-width:66rem;margin:0 auto;padding:0 1.25rem}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:1rem;top:-4rem;background:var(--ink);color:var(--paper);padding:.6rem 1rem;border-radius:.5rem;z-index:30;text-decoration:none}
 .skip:focus{top:1rem}
-a:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 
-/* top bar */
-.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);
-  backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);
-  border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4rem}
-.logo{font:800 1.25rem "Bricolage Grotesque",sans-serif;text-decoration:none;letter-spacing:-.02em;white-space:nowrap}
-.nav{display:flex;align-items:center;gap:.25rem}
-.nav a{padding:.6rem .85rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:.97rem;transition:background .15s}
-.nav a:hover{background:var(--soft)}
-.nav a.cta{background:var(--btn-bg);color:var(--btn-ink)}
-.nav a.cta:hover{opacity:.85}
-.icon-btn{width:2.5rem;height:2.5rem;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);
-  cursor:pointer;font-size:1.05rem;display:grid;place-items:center;margin-left:.35rem;transition:background .15s}
-.icon-btn:hover{background:var(--soft)}
-@media(max-width:560px){.nav a.hide-sm{display:none}}
+/* scrolling strip */
+.strip{background:var(--accent);color:var(--accent-ink);overflow:hidden;white-space:nowrap;
+  font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
+.strip>div{display:inline-block;padding:.6rem 0;animation:slide 40s linear infinite}
+.strip span{display:inline-block;margin:0 1.1rem}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* site bar */
+.bar{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:2px solid var(--ink);padding-top:env(safe-area-inset-top,0px)}
+.site{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4.25rem}
+.brand{font:800 1.55rem var(--serif);text-decoration:none;letter-spacing:-.03em;line-height:1}
+.brand small{display:block;font:500 .7rem var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.2rem}
+.links{display:flex;align-items:center;gap:.25rem}
+.links a{padding:.55rem .8rem;font-weight:700;font-size:.97rem;text-decoration:none;border-radius:.6rem}
+.links a:hover{background:var(--card)}
+.icon-btn{width:2.6rem;height:2.6rem;margin-left:.35rem;border-radius:.6rem;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;font-size:1.05rem;display:grid;place-items:center}
+.icon-btn:hover{background:var(--ink);color:var(--paper)}
 
 /* buttons */
 .btns{display:flex;gap:.75rem;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:3rem;padding:.75rem 1.5rem;border-radius:999px;
-  font:600 1rem Figtree,system-ui,sans-serif;text-decoration:none;cursor:pointer;
-  background:var(--btn-bg);color:var(--btn-ink);border:2px solid var(--btn-bg);transition:transform .15s,opacity .15s,background .15s}
-.btn:hover{opacity:.88;transform:translateY(-1px)}
-.btn:active{transform:translateY(0)}
-.btn.alt{background:transparent;color:var(--ink);border-color:var(--ink)}
-.btn.alt:hover{background:var(--ink);color:var(--bg);opacity:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:3.1rem;padding:.75rem 1.5rem;border-radius:.75rem;
+  font:700 1rem var(--sans);text-decoration:none;cursor:pointer;border:2px solid var(--ink);background:var(--ink);color:var(--paper);
+  transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--accent)}
+.btn:active{transform:none;box-shadow:none}
+.btn.accent{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.accent:hover{box-shadow:4px 4px 0 var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
 
 /* hero */
-.hero{padding:clamp(3.5rem,10vw,7rem) 0 clamp(3rem,8vw,5.5rem);border-bottom:1px solid var(--line)}
-.eyebrow{display:inline-block;font-weight:600;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem}
-.hero h1{font-size:clamp(3rem,11vw,7rem);font-weight:800;max-width:11ch}
-.hero p{font-size:1.25rem;color:var(--muted);max-width:34rem;margin:1.5rem 0 2rem}
+.hero{display:grid;gap:3rem;align-items:center;padding:clamp(2.5rem,7vw,5.5rem) 0 clamp(2.5rem,6vw,4.5rem)}
+@media(min-width:900px){.hero{grid-template-columns:1.3fr .9fr}}
+.eyebrow{font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem}
+.hero h1{font-weight:800;font-size:clamp(3.1rem,9.5vw,6.4rem);line-height:.95}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--accent)}
+.lead{font-size:1.2rem;color:var(--muted);max-width:32rem;margin:1.5rem 0 2rem}
+
+.ticket{background:var(--card);border:2px solid var(--ink);border-radius:1.25rem;padding:1.5rem 1.5rem 1.6rem;box-shadow:8px 8px 0 var(--accent)}
+@media(min-width:900px){.ticket{transform:rotate(1.2deg)}}
+.ticket h2{font-size:1.5rem;font-weight:800;padding-bottom:.9rem;margin-bottom:.4rem;border-bottom:2px dashed var(--line)}
+.ticket ul{list-style:none;margin:0 0 1.25rem;padding:0}
+.ticket li{display:flex;align-items:baseline;gap:.5rem;padding:.55rem 0}
+.ticket li span{font-weight:700}
+.ticket li i{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-.25rem);min-width:.75rem}
+.ticket li b{font:800 1rem var(--serif);white-space:nowrap}
+.ticket .btn{width:100%}
+
+/* facts */
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:1rem;overflow:hidden}
+@media(min-width:760px){.facts{grid-template-columns:repeat(4,1fr)}}
+.fact{background:var(--paper);padding:1.5rem 1.25rem}
+.fact b{display:block;font:800 clamp(1.9rem,5vw,2.8rem)/1 var(--serif);letter-spacing:-.03em;margin-bottom:.35rem}
+.fact span{color:var(--muted);font-size:.95rem}
 
 /* sections */
 section{padding:clamp(3rem,7vw,5rem) 0}
-h2{font-size:clamp(1.9rem,5vw,2.8rem);font-weight:800;margin-bottom:1rem}
-.two{display:grid;gap:2.5rem;grid-template-columns:1fr}
-@media(min-width:760px){.two{grid-template-columns:1fr 1fr}}
-p{margin:0 0 1rem}
+h2.big{font-weight:800;font-size:clamp(2rem,5.5vw,3.2rem);line-height:1.02;margin-bottom:1rem}
+.two{display:grid;gap:2rem;grid-template-columns:1fr}
+@media(min-width:760px){.two{grid-template-columns:1fr 1fr;gap:3.5rem}}
 .muted{color:var(--muted)}
 
-/* facts */
-.facts{display:grid;grid-template-columns:repeat(2,1fr);margin-top:3rem;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-@media(min-width:760px){.facts{grid-template-columns:repeat(4,1fr)}}
-.fact{padding:1.5rem 1.25rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0}
-.fact b{font:800 2rem "Bricolage Grotesque",sans-serif;display:block;letter-spacing:-.02em}
-.fact span{color:var(--muted);font-size:.95rem}
+/* category jump chips */
+.jump{padding-top:0}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.25rem}
+.chips a{display:inline-flex;align-items:center;gap:.45rem;padding:.6rem 1rem;border:2px solid var(--ink);border-radius:.7rem;
+  text-decoration:none;font-weight:700;font-size:.95rem;background:var(--card);transition:transform .12s,box-shadow .12s}
+.chips a:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--accent)}
 
-/* menu helpers (used on menu page) */
-.menu{list-style:none;padding:.5rem 1.25rem;margin:0;border:1px solid var(--line);border-radius:var(--radius)}
-.menu li{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line)}
-.menu li:last-child{border:0}
-.menu small{display:block;color:var(--muted)}
-.price{font-weight:600;white-space:nowrap}
-.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
-.mcat{border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;background:var(--bg)}
-.mcat h3{font-size:1.5rem;margin-bottom:.35rem}
-.mcat .d{color:var(--muted);font-size:.95rem;margin:0 0 .75rem}
-.mcat ul{list-style:none;margin:0;padding:0}
-.mcat li{padding:.5rem 0;border-top:1px solid var(--line);font-weight:600}
-.mcat small{display:block;font-weight:400;color:var(--muted)}
-.note{color:var(--muted);font-size:.95rem;margin-top:.75rem}
-
-/* band */
-.band{background:var(--btn-bg);color:var(--btn-ink);text-align:center;padding:clamp(2rem,6vw,3.5rem) 1.25rem}
-.band p{font:800 clamp(1.6rem,5vw,2.8rem)/1.1 "Bricolage Grotesque",sans-serif;margin:0;letter-spacing:-.02em}
+/* steps */
+.how{background:var(--card);border-block:2px solid var(--ink)}
+.steps{list-style:none;margin:2rem 0 0;padding:0;display:grid;gap:1.5rem;grid-template-columns:1fr}
+@media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr);gap:2rem}}
+.steps .n{display:block;font:800 3.2rem/1 var(--serif);color:var(--accent);margin-bottom:.4rem}
+.steps b{display:block;font:800 1.3rem var(--serif);margin-bottom:.25rem}
+.steps span{color:var(--muted)}
 
 /* find us */
-#find{background:var(--soft)}
-.card{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem}
-.card address{font-style:normal;font-size:1.15rem;line-height:1.6;margin-bottom:1.25rem}
-.card address strong{display:block;font:800 1.4rem "Bricolage Grotesque",sans-serif;margin-bottom:.25rem;letter-spacing:-.02em}
-.steps{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
-.steps li{display:flex;gap:1rem;align-items:flex-start}
-.steps .n{flex:none;width:2rem;height:2rem;border-radius:50%;background:var(--btn-bg);color:var(--btn-ink);display:grid;place-items:center;font-weight:600;font-size:.9rem}
-.copied{min-height:1.4rem;margin:.75rem 0 0;font-size:.92rem;color:var(--muted)}
-.map{margin-top:2rem;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--bg)}
-.map iframe{display:block;width:100%;height:22rem;border:0;filter:var(--map-filter)}
-@media(min-width:760px){.map iframe{height:28rem}}
+.find-grid{display:grid;gap:1.5rem;grid-template-columns:1fr;align-items:stretch}
+@media(min-width:900px){.find-grid{grid-template-columns:.9fr 1.1fr}}
+.panel{background:var(--panel);color:var(--panel-ink);border-radius:1.25rem;padding:clamp(1.5rem,4vw,2.5rem);display:flex;flex-direction:column;justify-content:center}
+.panel .eyebrow{color:var(--accent)}
+.panel h2{font-weight:800;font-size:clamp(1.9rem,4.5vw,2.7rem);line-height:1.02;margin-bottom:1.25rem}
+.panel address{font-style:normal;font-size:1.15rem;line-height:1.65;margin-bottom:1.5rem}
+.panel address strong{display:block;font:800 1.25rem var(--serif);margin-bottom:.2rem}
+.panel .btn{border-color:var(--panel-ink)}
+.panel .btn.accent{border-color:var(--accent)}
+.panel .btn:hover{box-shadow:4px 4px 0 var(--panel-ink)}
+.panel .btn.ghost{color:var(--panel-ink)}
+.copied{min-height:1.4rem;margin:.75rem 0 0;font-size:.92rem;opacity:.75}
+.map{border-radius:1.25rem;overflow:hidden;border:2px solid var(--ink);min-height:22rem;background:var(--card)}
+.map iframe{display:block;width:100%;height:100%;min-height:22rem;border:0;filter:var(--map-filter)}
 
-footer{padding:2rem 0 2.5rem;color:var(--muted);font-size:.95rem;border-top:1px solid var(--line)}
+footer{padding:2rem 0 2.5rem;border-top:2px solid var(--ink);color:var(--muted);font-size:.95rem}
 footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-footer a{text-decoration:none;font-weight:600;color:var(--ink)}
+footer a{font-weight:700;color:var(--ink);text-decoration:none}
 footer a:hover{text-decoration:underline}
 </style>
 </head>
-<body>
-<a class="skip" href="#about">Skip to content</a>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
 
-<div class="top">
-  <div class="wrap">
-    <a class="logo" href="#top" aria-label="Kebab Zone, back to top">Kebab Zone</a>
-    <nav class="nav" aria-label="Main">
-      <a class="hide-sm" href="#about">About</a>
-      <a class="hide-sm" href="#find">Find us</a>
-      <a class="cta" href="menu.html">View menu</a>
+<div class="strip" aria-hidden="true"><div>
+  <span>Fresh, fast and fabulous</span><span>★</span><span>Pick-up</span><span>★</span><span>Turkish &amp; Middle Eastern</span><span>★</span>
+  <span>Fresh, fast and fabulous</span><span>★</span><span>Pick-up</span><span>★</span><span>Turkish &amp; Middle Eastern</span><span>★</span>
+  <span>Fresh, fast and fabulous</span><span>★</span><span>Pick-up</span><span>★</span><span>Turkish &amp; Middle Eastern</span><span>★</span>
+  <span>Fresh, fast and fabulous</span><span>★</span><span>Pick-up</span><span>★</span><span>Turkish &amp; Middle Eastern</span><span>★</span>
+  <span>Fresh, fast and fabulous</span><span>★</span><span>Pick-up</span><span>★</span><span>Turkish &amp; Middle Eastern</span><span>★</span>
+  <span>Fresh, fast and fabulous</span><span>★</span><span>Pick-up</span><span>★</span><span>Turkish &amp; Middle Eastern</span><span>★</span>
+</div></div>
+
+<header class="bar">
+  <div class="wrap site">
+    <a class="brand" href="#top">Kebab Zone<small>Underwood</small></a>
+    <nav class="links" aria-label="Main">
+      <a href="menu.html">Menu</a>
+      <a href="#find">Find us</a>
       <button class="icon-btn" id="theme" type="button" aria-label="Switch between light and dark mode" title="Light / dark">◐</button>
     </nav>
   </div>
-</div>
-
-<header class="hero" id="top">
-  <div class="wrap">
-    <span class="eyebrow">Turkish &amp; Middle Eastern</span>
-    <h1>Fresh kebabs, made fast.</h1>
-    <p>Fresh, authentic Mediterranean kebabs at Underwood. Turkish and Middle Eastern, made fast and made fresh.</p>
-    <div class="btns">
-      <a class="btn" href="menu.html">View menu</a>
-      <a class="btn alt" href="#find">Find us</a>
-    </div>
-  </div>
 </header>
 
-<main>
-<section id="about">
-  <div class="wrap two">
+<main id="main">
+  <div class="wrap hero">
     <div>
-      <h2>Welcome to Kebab Zone</h2>
-      <p class="muted">Turkish and Middle Eastern kebabs, gyros, platters, burgers and more, served at Underwood. Pick up your order and enjoy it fresh.</p>
+      <div class="eyebrow">Turkish &amp; Middle Eastern · Pick-up</div>
+      <h1>Fresh kebabs, <em>made fast.</em></h1>
+      <p class="lead">Fresh, authentic Mediterranean kebabs at Underwood. Turkish and Middle Eastern, made fast and made fresh.</p>
+      <div class="btns">
+        <a class="btn accent" href="menu.html">View menu</a>
+        <a class="btn ghost" href="#find">Find us</a>
+      </div>
     </div>
-    <div>
-      <h2>Something for everyone</h2>
-      <p class="muted">From chicken and doner kebabs to falafel and vegetarian options, snack packs, chargrills, desserts and wood-fired pizza, there is plenty to choose from.</p>
-    </div>
+    <aside class="ticket" aria-label="Crowd favourites">
+      <h2>Crowd favourites</h2>
+      <ul>
+        <li><span>Chicken Kebab</span><i></i><b>From $15.50</b></li>
+        <li><span>Chicken Gyro</span><i></i><b>$17.50</b></li>
+        <li><span>Chicken Shish</span><i></i><b>$28.00</b></li>
+        <li><span>Mix Grill</span><i></i><b>$43.00</b></li>
+        <li><span>Chips</span><i></i><b>From $6.00</b></li>
+      </ul>
+      <a class="btn" href="menu.html">See the full menu →</a>
+    </aside>
   </div>
+
   <div class="wrap">
     <div class="facts">
       <div class="fact"><b>71</b><span>Items on the menu</span></div>
@@ -168,46 +196,78 @@ footer a:hover{text-decoration:underline}
       <div class="fact"><b>Turkish</b><span>and Middle Eastern</span></div>
     </div>
   </div>
-</section>
 
-<div class="band"><p>Fresh, fast and fabulous</p></div>
+  <section id="about">
+    <div class="wrap two">
+      <div>
+        <h2 class="big">Welcome to Kebab Zone</h2>
+        <p class="muted">Turkish and Middle Eastern kebabs, gyros, platters, burgers and more, served at Underwood. Pick up your order and enjoy it fresh.</p>
+      </div>
+      <div>
+        <h2 class="big">Something for everyone</h2>
+        <p class="muted">From chicken and doner kebabs to falafel and vegetarian options, snack packs, chargrills, desserts and wood-fired pizza, there is plenty to choose from.</p>
+      </div>
+    </div>
+  </section>
 
-<section id="find">
-  <div class="wrap two">
-    <div>
-      <h2>Find us</h2>
-      <div class="card">
+  <section class="jump" aria-labelledby="jump-h">
+    <div class="wrap">
+      <h2 class="big" id="jump-h">Hungry? Jump straight in.</h2>
+      <div class="chips">
+        <a href="menu.html#kebabs">🥙 Kebabs</a>
+        <a href="menu.html#snack-pack">🍟 Snack Pack</a>
+        <a href="menu.html#kebab-platter">🍽️ Kebab Platter</a>
+        <a href="menu.html#ny-gyro">🌯 Ny Gyro</a>
+        <a href="menu.html#healthy-box">🥗 Healthy Box</a>
+        <a href="menu.html#chargrills">🍢 Chargrills</a>
+        <a href="menu.html#burgers">🍔 Burgers</a>
+        <a href="menu.html#pide-gozleme">🫓 Pide &amp; Gozleme</a>
+        <a href="menu.html#sides">🧆 Sides</a>
+        <a href="menu.html#sauces">🫙 Sauces</a>
+        <a href="menu.html#desserts">🍯 Desserts</a>
+        <a href="menu.html#wood-fired-pizza">🍕 Wood-fired Pizza</a>
+        <a href="menu.html#drinks">🥤 Drinks</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="order">
+    <div class="wrap">
+      <h2 class="big">Order your way</h2>
+      <p class="muted" style="max-width:34rem">Come in and order at the counter, or get it delivered. Ask in store for today's opening hours.</p>
+      <ol class="steps">
+        <li><span class="n">1</span><b>Browse the menu</b><span>Pick your favourites from 13 categories.</span></li>
+        <li><span class="n">2</span><b>Order your way</b><span>Come in and order at the counter, or get it delivered.</span></li>
+        <li><span class="n">3</span><b>Enjoy it fresh</b><span>Ask in store for today's opening hours.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="find">
+    <div class="wrap find-grid">
+      <div class="panel">
+        <div class="eyebrow">Find us</div>
+        <h2>Pick up at Gympie Central</h2>
         <address>
           <strong>Kebab Zone, Underwood</strong>
           Gympie Central<br>2 Mellor Street<br>Gympie QLD 4570
         </address>
         <div class="btns">
-          <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Gympie+Central+2+Mellor+Street+Gympie+QLD+4570">Get directions</a>
-          <button class="btn alt" id="copy" type="button">Copy address</button>
+          <a class="btn accent" href="https://www.google.com/maps/search/?api=1&amp;query=Gympie+Central+2+Mellor+Street+Gympie+QLD+4570">Get directions</a>
+          <button class="btn ghost" id="copy" type="button">Copy address</button>
         </div>
         <p class="copied" id="copied" role="status" aria-live="polite"></p>
       </div>
+      <div class="map">
+        <iframe
+          title="Map showing Gympie Central, 2 Mellor Street, Gympie QLD 4570"
+          src="https://www.google.com/maps?q=Gympie+Central+2+Mellor+Street+Gympie+QLD+4570&amp;output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
     </div>
-    <div>
-      <h2>Order your way</h2>
-      <ul class="steps">
-        <li><span class="n">1</span><div><b>Browse the menu</b><br><span class="muted">Pick your favourites from 13 categories.</span></div></li>
-        <li><span class="n">2</span><div><b>Order your way</b><br><span class="muted">Come in and order at the counter, or get it delivered.</span></div></li>
-        <li><span class="n">3</span><div><b>Enjoy it fresh</b><br><span class="muted">Ask in store for today's opening hours.</span></div></li>
-      </ul>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="map">
-      <iframe
-        title="Map showing Gympie Central, 2 Mellor Street, Gympie QLD 4570"
-        src="https://www.google.com/maps?q=Gympie+Central+2+Mellor+Street+Gympie+QLD+4570&amp;output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
+  </section>
 </main>
 
 <footer>
@@ -220,7 +280,6 @@ footer a:hover{text-decoration:underline}
 <script>
 (function(){
   var root=document.documentElement;
-  try{var saved=localStorage.getItem("kz-theme");if(saved)root.setAttribute("data-theme",saved);}catch(e){}
   document.getElementById("theme").addEventListener("click",function(){
     var dark=root.getAttribute("data-theme")==="dark"||
       (!root.getAttribute("data-theme")&&window.matchMedia("(prefers-color-scheme:dark)").matches);
