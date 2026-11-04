@@ -129,4 +129,113 @@ footer a:hover{text-decoration:underline}
     <a class="logo" href="#top" aria-label="Kebab Zone, back to top">Kebab Zone</a>
     <nav class="nav" aria-label="Main">
       <a class="hide-sm" href="#about">About</a>
-      <a class="hide-sm" href="#find">Find
+      <a class="hide-sm" href="#find">Find us</a>
+      <a class="cta" href="menu.html">View menu</a>
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch between light and dark mode" title="Light / dark">◐</button>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Turkish &amp; Middle Eastern</span>
+    <h1>Fresh kebabs, made fast.</h1>
+    <p>Fresh, authentic Mediterranean kebabs at Underwood. Turkish and Middle Eastern, made fast and made fresh.</p>
+    <div class="btns">
+      <a class="btn" href="menu.html">View menu</a>
+      <a class="btn alt" href="#find">Find us</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="about">
+  <div class="wrap two">
+    <div>
+      <h2>Welcome to Kebab Zone</h2>
+      <p class="muted">Turkish and Middle Eastern kebabs, gyros, platters, burgers and more, served at Underwood. Pick up your order and enjoy it fresh.</p>
+    </div>
+    <div>
+      <h2>Something for everyone</h2>
+      <p class="muted">From chicken and doner kebabs to falafel and vegetarian options, snack packs, chargrills, desserts and wood-fired pizza, there is plenty to choose from.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="facts">
+      <div class="fact"><b>71</b><span>Items on the menu</span></div>
+      <div class="fact"><b>13</b><span>Menu categories</span></div>
+      <div class="fact"><b>Pick-up</b><span>Order and collect</span></div>
+      <div class="fact"><b>Turkish</b><span>and Middle Eastern</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="band"><p>Fresh, fast and fabulous</p></div>
+
+<section id="find">
+  <div class="wrap two">
+    <div>
+      <h2>Find us</h2>
+      <div class="card">
+        <address>
+          <strong>Kebab Zone, Underwood</strong>
+          Gympie Central<br>2 Mellor Street<br>Gympie QLD 4570
+        </address>
+        <div class="btns">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Gympie+Central+2+Mellor+Street+Gympie+QLD+4570">Get directions</a>
+          <button class="btn alt" id="copy" type="button">Copy address</button>
+        </div>
+        <p class="copied" id="copied" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+    <div>
+      <h2>Order your way</h2>
+      <ul class="steps">
+        <li><span class="n">1</span><div><b>Browse the menu</b><br><span class="muted">Pick your favourites from 13 categories.</span></div></li>
+        <li><span class="n">2</span><div><b>Order your way</b><br><span class="muted">Come in and order at the counter, or get it delivered.</span></div></li>
+        <li><span class="n">3</span><div><b>Enjoy it fresh</b><br><span class="muted">Ask in store for today's opening hours.</span></div></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="map">
+      <iframe
+        title="Map showing Gympie Central, 2 Mellor Street, Gympie QLD 4570"
+        src="https://www.google.com/maps?q=Gympie+Central+2+Mellor+Street+Gympie+QLD+4570&amp;output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Kebab Zone, Underwood. Turkish and Middle Eastern.</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  try{var saved=localStorage.getItem("kz-theme");if(saved)root.setAttribute("data-theme",saved);}catch(e){}
+  document.getElementById("theme").addEventListener("click",function(){
+    var dark=root.getAttribute("data-theme")==="dark"||
+      (!root.getAttribute("data-theme")&&window.matchMedia("(prefers-color-scheme:dark)").matches);
+    var next=dark?"light":"dark";
+    root.setAttribute("data-theme",next);
+    try{localStorage.setItem("kz-theme",next);}catch(e){}
+  });
+  var msg=document.getElementById("copied");
+  document.getElementById("copy").addEventListener("click",function(){
+    var text="Gympie Central, 2 Mellor Street, Gympie QLD 4570";
+    function done(ok){msg.textContent=ok?"Address copied.":"Couldn't copy. Please select the address manually.";setTimeout(function(){msg.textContent="";},2500);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){done(true);},function(){done(false);});}
+    else{done(false);}
+  });
+})();
+</script>
+</body>
+</html>
